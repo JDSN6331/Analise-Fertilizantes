@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vendas de Fertilizante de Solo — Painel Gerencial</title>
+  
+  <!-- Google Fonts - Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/src/style.css">
+</head>
+<body>
+
+  <!-- Header Premium -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="logo-area">
+        <div class="logo-icon">
+          <!-- Icone Plant/Agro Flaticon Style -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22v-9"></path>
+            <path d="M12 13C12 7.477 7.523 3 2 3c0 5.523 4.477 10 10 10z"></path>
+            <path d="M12 13c0-5.523 4.477-10 10-10 0 5.523-4.477 10-10 10z"></path>
+            <path d="M12 22s4-3 4-6"></path>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <h1>Vendas de Fertilizante de Solo</h1>
+          <p>Painel Gerencial — Volume (TN) e Faturamento (R$) por Loja e Mesorregião</p>
+        </div>
+      </div>
+      <div class="header-badge">
+        <span id="header-period-badge">Período Vigente</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Container Principal -->
+  <main class="app-main">
+    
+    <!-- Loader de Carregamento -->
+    <div id="loader" class="loader-container">
+      <div class="spinner"></div>
+      <p>Carregando dados de Fertilizante Solo...</p>
+    </div>
+
+    <!-- Barra de Controle Unificada (Filtros de Período Próximos + Métrica Primária) -->
+    <section class="control-bar-panel">
+      <div class="control-filters-group">
+        <div class="control-group">
+          <label for="month-select-global" class="control-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="ctrl-icon">
+              <rect x="3" y="4" width="18" height="18" rx="3" ry="3"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            Mês de Análise:
+          </label>
+          <select id="month-select-global" class="premium-select">
+            <!-- Injetado dinamicamente via TypeScript -->
+          </select>
+        </div>
+
+        <div class="control-group">
+          <label for="week-select-global" class="control-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="ctrl-icon">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            Período Semanal:
+          </label>
+          <select id="week-select-global" class="premium-select">
+            <!-- Injetado dinamicamente via TypeScript -->
+          </select>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="ctrl-icon">
+            <line x1="18" y1="20" x2="18" y2="10"></line>
+            <line x1="12" y1="20" x2="12" y2="4"></line>
+            <line x1="6" y1="20" x2="6" y2="14"></line>
+          </svg>
+          Métrica Principal:
+        </label>
+        <div class="toggle-metric-buttons">
+          <button class="btn-toggle active" data-metric="volume">Volume em Toneladas (TN)</button>
+          <button class="btn-toggle" data-metric="faturamento">Faturamento (R$)</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cards de Métricas Principais (KPIs) -->
+    <div class="kpi-grid" id="kpi-container">
+      <!-- Injetado dinamicamente via TypeScript -->
+    </div>
+
+    <!-- LEGENDA SIMPLES E ELEGANTE DE REGIONAIS E LOJAS -->
+    <section class="dashboard-card simple-legend-card" style="margin-bottom: 2rem;">
+      <div class="card-header border-gold">
+        <div class="header-with-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="header-title-svg">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            <polyline points="2 17 12 22 22 17"></polyline>
+            <polyline points="2 12 12 17 22 12"></polyline>
+          </svg>
+          <h3>Legenda de Lojas por Regional Geográfica</h3>
+        </div>
+        <span class="badge badge-primary">Mapeamento Oficial Cooxupé</span>
+      </div>
+      <div class="card-body" style="padding: 1rem 1.5rem;">
+        <div class="simple-legend-container" id="simple-legend-container">
+          <!-- Injetado via TypeScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- PÓDIO ÚNICO E DINÂMICO COM FILTRO POR MESORREGIÃO GEOGRÁFICA -->
+    <section class="podium-single-section" style="margin-bottom: 2rem;">
+      <div class="dashboard-card podium-card">
+        <div class="card-header border-gold" style="flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem;">
+          <div class="header-with-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="header-title-svg gold">
+              <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+              <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+              <path d="M4 22h16"></path>
+              <path d="M10 14.66V17c0 .55-.45 1-1 1H7v4h10v-4h-2c-.55 0-1-.45-1-1v-2.34"></path>
+              <path d="M18 4H6v7a6 6 0 0 0 12 0V4z"></path>
+            </svg>
+            <h3>Pódio de Lojas Líderes</h3>
+            <span class="badge badge-accent" id="podium-branch-tag">Volume (TN)</span>
+          </div>
+
+          <!-- Seletor de Mesorregião no Pódio -->
+          <div class="control-group">
+            <label for="podium-region-filter" class="control-label" style="font-size: 0.8rem;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ctrl-icon" style="width: 16px; height: 16px;">
+                <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+              </svg>
+              Filtrar por Regional:
+            </label>
+            <select id="podium-region-filter" class="premium-select" style="min-width: 230px;">
+              <option value="todas">Todas as Regionais (Geral Cooxupé)</option>
+              <option value="REGIONAL - 1">REGIONAL - 1</option>
+              <option value="REGIONAL - 2">REGIONAL - 2</option>
+              <option value="REGIONAL - 3">REGIONAL - 3</option>
+              <option value="REGIONAL - 4">REGIONAL - 4</option>
+              <option value="REGIONAL - 5">REGIONAL - 5</option>
+              <option value="REGIONAL - 6">REGIONAL - 6</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <div class="podium-container" id="podium-branches">
+            <!-- Injetado via TypeScript -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GRID PRINCIPAL DE ANÁLISE: MESORREGIÕES E MELHORES VENDEDORES -->
+    <div class="main-analysis-grid">
+      
+      <!-- Bloco 1: Mesorregiões Geográficas -->
+      <div class="dashboard-card">
+        <div class="card-header border-gold">
+          <div class="header-with-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="header-title-svg">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <h3>Vendas por Mesorregião Geográfica</h3>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="region-bars" id="mesoregions-list">
+            <!-- Injetado via TypeScript -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Bloco 2: Melhores Vendedores -->
+      <div class="dashboard-card">
+        <div class="card-header border-gold">
+          <div class="header-with-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="header-title-svg">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+            <h3>Melhores Vendedores</h3>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="sellers-ranking-list" id="top-sellers-list">
+            <!-- Injetado via TypeScript -->
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- EVOLUÇÃO SEMANAL EM SEÇÃO PRÓPRIA FULL-WIDTH -->
+    <section class="dashboard-card" style="margin-top: 2rem;">
+      <div class="card-header border-gold" style="flex-wrap: wrap; justify-content: space-between; align-items: center;">
+        <div class="header-with-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="header-title-svg">
+            <line x1="18" y1="20" x2="18" y2="10"></line>
+            <line x1="12" y1="20" x2="12" y2="4"></line>
+            <line x1="6" y1="20" x2="6" y2="14"></line>
+          </svg>
+          <h3>Evolução Semanal de Vendas <span id="weekly-evolution-title-span"></span></h3>
+        </div>
+        <div class="chart-legend">
+          <div class="legend-item">
+            <span class="legend-dot dot-green"></span>
+            <span class="legend-text">Volume (TN)</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-dot dot-gold"></span>
+            <span class="legend-text">Faturamento (R$)</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-body" style="padding: 1.5rem 1rem 0.5rem 1rem;">
+        <div id="weekly-evolution-list">
+          <!-- Injetado via TypeScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- TABELA COMPLETA DE LOJAS / FILIAIS -->
+    <section class="dashboard-card table-card" style="margin-top: 2rem;">
+      <div class="card-header border-gold table-header-flex">
+        <div class="header-with-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="header-title-svg">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+          </svg>
+          <h3>Vendas Detalhadas por Loja / Filial</h3>
+        </div>
+        <!-- Input de Busca Profissional por Filial -->
+        <div class="search-input-wrapper">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="search-icon-svg">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="branch-search-input" placeholder="Buscar por loja ou regional...">
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="width: 70px">Pos.</th>
+                <th>Loja / Filial</th>
+                <th>Mesorregião Geográfica</th>
+                <th class="text-right">Volume (TN)</th>
+                <th class="text-right">Share Volume</th>
+                <th class="text-right">Faturamento Total</th>
+                <th class="text-right">Share Faturamento</th>
+                <th class="text-right">Qtd. Pedidos</th>
+              </tr>
+            </thead>
+            <tbody id="branches-table-body">
+              <!-- Injetado via TypeScript -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="app-footer">
+    <div class="footer-container">
+      <p>&copy; 2026 Vendas de Fertilizante de Solo — Controle Gerencial Cooxupé. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
